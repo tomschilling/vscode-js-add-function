@@ -43,8 +43,11 @@ function activate (context) {
     text
       ? vscode.commands.executeCommand('cursorBottom')
         .then(() => {
-          const logToInsert = `function ${text} {\n\n}`
-          insertText(logToInsert)
+          vscode.commands.executeCommand('editor.action.insertLineAfter')
+            .then(() => {
+              const logToInsert = `function ${text} {\n\n}`
+              insertText(logToInsert)
+            })
         })
       : vscode.window.showInformationMessage('Please highlight function!')
   })
