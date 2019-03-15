@@ -23,8 +23,8 @@
 		"keybindings": [
 			{
 				"command": "extension.addFunction",
-				"key": "shift+ctrl+f",
-				"mac": "shift+cmd+f",
+				"key": "shift+ctrl+a",
+				"mac": "shift+cmd+a",
 				"when": "editorTextFocus"
 			}
 		]
