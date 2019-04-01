@@ -13,13 +13,13 @@ function activate (context) {
     const editor = vscode.window.activeTextEditor
     if (!editor) { return }
     const selection = editor.selection
-    const fileString = editor.document.getText()
+    const fileStringArray = editor._documentData._lines
     const text = editor.document.getText(selection)
 
     if (text) {
-      if (fileString.includes('ampersand')) {
-        const fileStringArray = editor._documentData._lines
-        _addAmpersandFunc(fileStringArray, text)
+      const context = checkContext(fileStringArray)
+      if (context.isObjectMethod) {
+        _addObjectFunc(fileStringArray, text, context)
       } else {
         _addFunc(text)
       }
@@ -62,12 +62,12 @@ function _insertFunc (val) {
 }
 
 /**
- * Adds a function to the PENULTIMATE position
+ * Adds a function to the last position in object
  * @param {String} filePath
  * @param {String} newFunction
  */
-function _addAmpersandFunc (fileStringArray, text) {
-  const lastFunctionIndex = getLastFunctionIndex(fileStringArray)
+function _addObjectFunc (fileStringArray, text, context) {
+  const lastFunctionIndex = context.endIndex - 2
   if (lastFunctionIndex) {
     const editor = vscode.window.activeTextEditor
 
@@ -96,17 +96,6 @@ function _addAmpersandFunc (fileStringArray, text) {
   }
 }
 
-function getLastFunctionIndex (fileStringArray) {
-  const lastFunctionKeyword = '},'
-  let lastFunctionIndex = -1
-  for (let k = 0; k < fileStringArray.length; k++) {
-    if (fileStringArray[k].includes(lastFunctionKeyword)) {
-      lastFunctionIndex = k
-    }
-  }
-  if (lastFunctionIndex > -1) return lastFunctionIndex
-}
-
 /**
  * Get the used white spaces from a input string
  * @param {String} codeLine
@@ -126,4 +115,56 @@ function getUsedWhiteSpaces (codeLine) {
   }
 
   return whiteSpaceArray.join('')
+}
+
+/**
+ * Checks if context is whether in object or not
+ * @param {String} filePath
+ * @param {String} newFunction
+ */
+function checkContext (fileStringArray) {
+  for (let i = 0; i < fileStringArray.length; i++) {
+    const codeLine = fileStringArray[i]
+    var lastChar = codeLine[codeLine.length - 1]
+    if (lastChar === '{') {
+      const beginIndex = i
+      const endIndex = _getEndOfFunction(fileStringArray, beginIndex, '{', '}')
+      const editor = vscode.window.activeTextEditor
+      const position = editor.selection.active
+      if (beginIndex < position.line && endIndex > position.line) {
+        return { isObjectMethod: true, endIndex: endIndex }
+      }
+      return { isObjectMethod: false }
+    }
+  }
+}
+
+/**
+ * Gets the code line index of the function or array
+ * @param {Array} fileStringArray
+ * @param {Number} codeLineIndex
+ * @param {String} startDelimiter
+ * @param {String} endDelimiter
+ * @returns {Number} codeLineIndex- The code line index from the end of function or array
+ */
+function _getEndOfFunction (fileStringArray, codeLineIndex, startDelimiter, endDelimiter) {
+  let braceLeftCount = 0
+  let braceRightCount = 0
+
+  while (!fileStringArray[codeLineIndex].includes(endDelimiter)) {
+    if (fileStringArray[codeLineIndex].includes(startDelimiter)) {
+      braceLeftCount++
+    }
+    codeLineIndex++
+  }
+  while (braceLeftCount !== braceRightCount) {
+    if (fileStringArray[codeLineIndex].includes(startDelimiter)) {
+      braceLeftCount++
+    }
+    if (fileStringArray[codeLineIndex].includes(endDelimiter)) {
+      braceRightCount++
+    }
+    codeLineIndex++
+  }
+  return codeLineIndex
 }
