@@ -127,11 +127,13 @@ function checkContext (fileStringArray) {
     const codeLine = fileStringArray[i]
     var lastChar = codeLine[codeLine.length - 1]
     if (lastChar === '{') {
+      // @TODO: Do not just check context from the beginning of the file. Check context around position.
       const beginIndex = i
-      const endIndex = _getEndOfFunction(fileStringArray, beginIndex, '{', '}')
+      const endIndex = _getEndOfObject(fileStringArray, beginIndex, '{', '}')
+      const objectString = _copyObject(fileStringArray, beginIndex)
       const editor = vscode.window.activeTextEditor
       const position = editor.selection.active
-      if (beginIndex < position.line && endIndex > position.line) {
+      if (beginIndex < position.line && endIndex > position.line && typeof objectString !== 'function') {
         return { isObjectMethod: true, endIndex: endIndex }
       }
       return { isObjectMethod: false }
@@ -147,7 +149,7 @@ function checkContext (fileStringArray) {
  * @param {String} endDelimiter
  * @returns {Number} codeLineIndex- The code line index from the end of function or array
  */
-function _getEndOfFunction (fileStringArray, codeLineIndex, startDelimiter, endDelimiter) {
+function _getEndOfObject (fileStringArray, codeLineIndex, startDelimiter, endDelimiter) {
   let braceLeftCount = 0
   let braceRightCount = 0
 
@@ -167,4 +169,21 @@ function _getEndOfFunction (fileStringArray, codeLineIndex, startDelimiter, endD
     codeLineIndex++
   }
   return codeLineIndex
+}
+
+/**
+ * Copy a function from .js file
+ * @param {Array} fileStringArray
+ * @param {Number} codeLineIndex
+ * @returns {String} functionArray.join('\n') - The the copied function from input code line
+ */
+function _copyObject (fileStringArray, codeLineIndex) {
+  let beginIndex = codeLineIndex
+  let endIndex = _getEndOfObject(fileStringArray, codeLineIndex, '{', '}')
+  let functionArray = []
+  while (beginIndex !== endIndex) {
+    functionArray.push(fileStringArray[beginIndex])
+    beginIndex++
+  }
+  return functionArray.join('\n')
 }
