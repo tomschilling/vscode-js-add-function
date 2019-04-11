@@ -1,6 +1,11 @@
 # vscode-js-add-function README
 
-This is a test version of my javascript add function extension.
+How good is adding a new function? 
+Even better when you can easily add your already written function to your file.
+
+##Installing
+
+Extension is available for free in the Visual Studio Code Marketplace.
 
 ## Features
 
@@ -27,10 +32,13 @@ function bar() {
 }
 ```
 
-## Requirements
+##Usage
 
-Don't know yet
+1. Highlight a written function
+2. Press Cmd+Shift+A
+3. The function will be added at and of object or file
+
 
 ## Known Issues
 
-Methods in object context are not add with the correct white spacxe to do your stuff.
+Methods in object context are not added with the correct white space. You have to tab to do your stuff.
