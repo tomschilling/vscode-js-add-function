@@ -3,12 +3,7 @@
 How good is adding a new function? 
 Even better when you can easily add your already written function to your file.
 
-![object method](gif/objectMethod.gif)
-
-![unbound function](gif/function.gif)
-
-
-##Installing
+## Installing
 
 Extension is available for free in the Visual Studio Code Marketplace.
 
@@ -27,6 +22,9 @@ var obj = {
 };
 ```
 
+![object method](gif/objectMethod.gif)
+
+
 ```
 function foo() {
     bar()
@@ -36,6 +34,9 @@ function bar() {
     // do your stuff
 }
 ```
+
+![unbound function](gif/function.gif)
+
 
 ##Usage
 
