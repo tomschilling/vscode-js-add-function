@@ -3,6 +3,11 @@
 How good is adding a new function? 
 Even better when you can easily add your already written function to your file.
 
+![object method](gifs/objectMethod.gif)
+
+![unbound function](gifs/function.gif)
+
+
 ##Installing
 
 Extension is available for free in the Visual Studio Code Marketplace.
