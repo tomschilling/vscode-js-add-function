@@ -45,7 +45,7 @@ function bar() {
 
 1. Highlight a written function
 2. Press Cmd+Shift+A
-3. The function will be added at and of object or file
+3. The function will be added at the end of object or file
 
 
 ## Known Issues
