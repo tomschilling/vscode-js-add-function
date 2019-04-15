@@ -1,7 +1,6 @@
 # vscode-js-add-function README
 
-How good is adding a new function? 
-Even better when you can easily add your already written function to your file.
+Easily add your already written function to your file.
 
 ## Installing
 
