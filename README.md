@@ -23,7 +23,7 @@ var obj = {
 
 ### Object Context
 
-![object method](gif/objectMethod.gif)
+![object method](img/objectMethod.gif)
 
 <!-- 
 ```
@@ -38,7 +38,7 @@ function bar() {
 
 ### Unbound Function
 
-![unbound function](gif/function.gif)
+![unbound function](img/function.gif)
 
 ## Usage
 
