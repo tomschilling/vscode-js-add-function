@@ -1,7 +1,7 @@
 {
 	"name": "vscode-js-add-function",
 	"displayName": "vscode-js-add-function",
-	"description": "Help add functions.",
+	"description": "Easily add your already written function to your file.",
 	"publisher": "motschi",
 	"version": "0.0.1",
 	"engines": {
