@@ -1,4 +1,4 @@
-# JavaScript Add Function
+# Add JavaScript Function
 
 Easily add your already written function to your file.
 
