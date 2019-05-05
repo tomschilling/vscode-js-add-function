@@ -1,10 +1,16 @@
-# vscode-js-add-function README
+# JavaScript Add Function
 
 Easily add your already written function to your file.
 
 ## Installing
 
 Extension is available for free in the Visual Studio Code Marketplace.
+
+## Usage
+
+1. Highlight a written function
+2. Press Cmd+Shift+A
+3. The function will be added at the end of object or file
 
 ## Features
 
@@ -39,13 +45,6 @@ function bar() {
 ### Unbound Function
 
 ![unbound function](img/function.gif)
-
-## Usage
-
-1. Highlight a written function
-2. Press Cmd+Shift+A
-3. The function will be added at the end of object or file
-
 
 ## Known Issues
 
