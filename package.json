@@ -3,15 +3,15 @@
 	"displayName": "JavaScript Add Function",
 	"description": "Easily add your already written function to your file.",
 	"publisher": "motschi",
-	"license": "MIT",	
-	"version": "1.0.3",
+	"license": "MIT",
+	"version": "1.0.4",
 	"icon": "img/logo.png",
 	"engines": {
 		"vscode": "^1.32.0"
 	},
 	"categories": [
-		"Programming Languages", 
-		"Snippets", 
+		"Programming Languages",
+		"Snippets",
 		"Other"
 	],
 	"keywords": [
