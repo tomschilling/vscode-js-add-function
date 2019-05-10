@@ -4,7 +4,7 @@
 	"description": "Easily add your already written function to your file.",
 	"publisher": "motschi",
 	"license": "MIT",
-	"version": "1.0.5",
+	"version": "1.0.4",
 	"icon": "img/logo.png",
 	"engines": {
 		"vscode": "^1.32.0"
